@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presentasi EXORA — Sistem Absensi Rapat Organisasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Dynamic Ambient Canvas & Monochrome Background -->
+  <canvas id="bgParticles" aria-hidden="true"></canvas>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="cursor-aura" id="cursorAura" aria-hidden="true"></div>
+  <div class="bg-glow glow-top" aria-hidden="true"></div>
+  <div class="bg-glow glow-bottom" aria-hidden="true"></div>
+
+  <!-- Top Progress Bar -->
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+
+  <!-- Top Navigation Header -->
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <span class="brand-title">EXORA</span>
+      <span class="brand-divider">/</span>
+      <span class="brand-sub">WEB PRESENTATION</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="btnOverview" title="Lihat Semua Slide (G)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+          <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+          <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+        </svg>
+        <span>Grid</span>
+      </button>
+      <button class="icon-btn" id="btnFullscreen" title="Layar Penuh (F)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
+        <span>Fullscreen</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Presentation Stage -->
+  <main class="deck" id="deck">
+
+    <!-- SLIDE 1: COVER -->
+    <section class="slide active" data-title="Cover & Identitas">
+      <div class="slide-inner cover-layout">
+        <div class="pill-badge stagger-1">
+          <span class="pulse-ring"></span>
+          SISTEM INFORMASI ORGANISASI BERBASIS WEB
+        </div>
+        <h1 class="hero-title stagger-2">
+          EXORA
+          <span class="hero-subtitle" id="typingSubtitle" data-text="Sistem Absensi Rapat Anggota Organisasi">Sistem Absensi Rapat Anggota Organisasi</span>
+        </h1>
+        <p class="hero-desc stagger-3">
+          Perancangan arsitektur sistem, pemodelan UML, hingga implementasi antarmuka berbasis peran untuk digitalisasi pencatatan kehadiran rapat organisasi.
+        </p>
+        <div class="author-card spotlight-card stagger-4">
+          <div class="author-item">
+            <span class="meta-label">PENYUSUN</span>
+            <span class="meta-value">Nayla Faizatul Khusnah</span>
+          </div>
+          <div class="author-sep"></div>
+          <div class="author-item">
+            <span class="meta-label">NPM</span>
+            <span class="meta-value mono">25010065</span>
+          </div>
+          <div class="author-sep"></div>
+          <div class="author-item">
+            <span class="meta-label">PLATFORM</span>
+            <span class="meta-value">Web Application (Multi-Role)</span>
+          </div>
+        </div>
+        <button class="start-cta stagger-5" id="btnStartDeck">
+          <span>Mulai Presentasi</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- SLIDE 2: LATAR BELAKANG & SOLUSI -->
+    <section class="slide" data-title="Latar Belakang & Tujuan">
+      <div class="slide-inner">
+        <div class="slide-header stagger-1">
+          <span class="step-tag">01 // ANALISIS KEBUTUHAN</span>
+          <h2>Latar Belakang &amp; Solusi Sistem</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card spotlight-card card-dark stagger-2">
+            <div class="card-tag">PERMASALAHAN SAAT INI</div>
+            <h3>Pencatatan Manual Konvensional</h3>
+            <ul class="clean-list">
+              <li>
+                <strong>Data Rawan Tercecer:</strong> Absensi masih menggunakan kertas atau pesan chat yang tidak terpusat dan sulit ditelusuri kembali.
+              </li>
+              <li>
+                <strong>Rekapitulasi Lambat:</strong> Sekretaris membutuhkan waktu lama untuk menghitung ulang kehadiran setiap selesai rapat.
+              </li>
+              <li>
+                <strong>Minim Transparansi Status:</strong> Sulit memantau rincian anggota yang <em>Hadir</em>, <em>Izin</em>, <em>Sakit</em>, atau <em>Tidak Hadir</em> secara cepat.
+              </li>
+            </ul>
+          </div>
+          <div class="card spotlight-card card-light stagger-3">
+            <div class="card-tag dark-tag">SOLUSI YANG DIBANGUN</div>
+            <h3>Sistem Web Terintegrasi (EXORA)</h3>
+            <ul class="clean-list">
+              <li>
+                <strong>Database Terpusat:</strong> Seluruh data anggota, jadwal rapat, dan log kehadiran tersimpan aman dan terstruktur.
+              </li>
+              <li>
+                <strong>Rekap Otomatis Real-Time:</strong> Ringkasan statistik kehadiran langsung terhitung di dashboard begitu anggota mengisi presensi.
+              </li>
+              <li>
+                <strong>Akses Multi-Peran:</strong> Pemisahan hak akses yang tegas antara Admin/Sekretaris dan Anggota organisasi.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: ROLE AKSES & MATRIKS HAK AKSES -->
+    <section class="slide" data-title="Role & Matriks Hak Akses">
+      <div class="slide-inner">
+        <div class="slide-header-row stagger-1">
+          <div>
+            <span class="step-tag">02 // OTORISASI PENGGUNA</span>
+            <h2>Role Akses &amp; Matriks Hak Akses</h2>
+          </div>
+          <span class="interactive-hint mono">Klik kartu role untuk sorot matriks</span>
+        </div>
+        <div class="split-asymmetric">
+          <div class="role-stack stagger-2">
+            <div class="card spotlight-card role-trigger" data-role-target="admin">
+              <div class="card-tag">ROLE 01 &bull; KLIK UNTUK SOROT</div>
+              <h3>Admin / Sekretaris</h3>
+              <p class="card-text">
+                Bertindak sebagai pengelola utama sistem: mengelola data anggota, jadwal rapat, validasi absensi, serta mencetak rekap laporan organisasi.
+              </p>
+            </div>
+            <div class="card spotlight-card role-trigger" data-role-target="anggota">
+              <div class="card-tag">ROLE 02 &bull; KLIK UNTUK SOROT</div>
+              <h3>Anggota Organisasi</h3>
+              <p class="card-text">
+                Pengguna akhir yang mengakses jadwal rapat aktif, melakukan pengisian kehadiran mandiri, dan memantau riwayat absensi pribadi.
+              </p>
+            </div>
+          </div>
+
+          <div class="card spotlight-card table-card stagger-3">
+            <table class="mono-table" id="matrixTable">
+              <thead>
+                <tr>
+                  <th>Fitur Sistem</th>
+                  <th class="center col-admin">Admin / Sekretaris</th>
+                  <th class="center col-anggota">Anggota</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Login &amp; Logout Sistem</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center check col-anggota">✓</td>
+                </tr>
+                <tr>
+                  <td>Kelola Data Anggota (CRUD)</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center dash col-anggota">—</td>
+                </tr>
+                <tr>
+                  <td>Kelola Data Rapat (CRUD)</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center dash col-anggota">—</td>
+                </tr>
+                <tr>
+                  <td>Melihat Jadwal Rapat</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center check col-anggota">✓</td>
+                </tr>
+                <tr>
+                  <td>Mengisi Absensi</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center check col-anggota">✓</td>
+                </tr>
+                <tr>
+                  <td>Mengubah Data Absensi</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center dash col-anggota">—</td>
+                </tr>
+                <tr>
+                  <td>Melihat Rekap Absensi Keseluruhan</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center dash col-anggota">—</td>
+                </tr>
+                <tr>
+                  <td>Melihat Riwayat Absensi Pribadi</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center check col-anggota">✓</td>
+                </tr>
+                <tr>
+                  <td>Cetak Laporan Absensi</td>
+                  <td class="center check col-admin">✓</td>
+                  <td class="center dash col-anggota">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: BASIC LOGIC SETIAP ROLE -->
+    <section class="slide" data-title="Basic Logic Role Akses">
+      <div class="slide-inner">
+        <div class="slide-header stagger-1">
+          <span class="step-tag">03 // LOGIKA ALUR KERJA</span>
+          <h2>Basic Logic Setiap Role Akses</h2>
+        </div>
+        <div class="grid-2">
+          <div class="card spotlight-card stagger-2">
+            <div class="card-tag">ALUR ADMIN / SEKRETARIS</div>
+            <div class="flow-steps">
+              <div class="flow-item">
+                <span class="flow-num">01</span>
+                <div>
+                  <strong>Login Dashboard Admin</strong>
+                  <p>Autentikasi menggunakan username &amp; password untuk masuk ke panel kendali.</p>
+                </div>
+              </div>
+              <div class="flow-item">
+                <span class="flow-num">02</span>
+                <div>
+                  <strong>Kelola Data Anggota &amp; Rapat</strong>
+                  <p>Menambah, mengubah, atau menghapus master data anggota serta agenda, tanggal, waktu, dan tempat rapat.</p>
+                </div>
+              </div>
+              <div class="flow-item">
+                <span class="flow-num">03</span>
+                <div>
+                  <strong>Kelola Status Absensi</strong>
+                  <p>Memverifikasi dan memperbarui status kehadiran (Hadir, Izin, Sakit, Tidak Hadir).</p>
+                </div>
+              </div>
+              <div class="flow-item">
+                <span class="flow-num">04</span>
+                <div>
+                  <strong>Rekap &amp; Cetak Laporan</strong>
+                  <p>Menampilkan rekap per periode/rapat dan menyimpan atau mencetak laporan resmi.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card spotlight-card stagger-3">
+            <div class="card-tag">ALUR ANGGOTA</div>
+            <div class="flow-steps">
+              <div class="flow-item">
+                <span class="flow-num">01</span>
+                <div>
+                  <strong>Login Halaman Anggota</strong>
+                  <p>Masuk ke dashboard pribadi untuk melihat ringkasan kehadiran.</p>
+                </div>
+              </div>
+              <div class="flow-item">
+                <span class="flow-num">02</span>
+                <div>
+                  <strong>Melihat Jadwal Rapat</strong>
+                  <p>Mengecek agenda rapat terdekat lengkap dengan tanggal, jam, dan lokasi.</p>
+                </div>
+              </div>
+              <div class="flow-item">
+                <span class="flow-num">03</span>
+                <div>
+                  <strong>Mengisi Absensi Mandiri</strong>
+                  <p>Memilih jadwal rapat aktif lalu menentukan status kehadiran (Hadir, Izin, atau Sakit).</p>
+                </div>
+              </div>
+              <div class="flow-item">
+                <span class="flow-num">04</span>
+                <div>
+                  <strong>Melihat Riwayat Kehadiran</strong>
+                  <p>Memantau rekam jejak kehadiran dan akumulasi partisipasi pada rapat sebelumnya.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 5: UML USE CASE & ACTIVITY DIAGRAM (WITH SCREENSHOTS & SPEAKER NOTES) -->
+    <section class="slide" data-title="UML: Use Case & Activity">
+      <div class="slide-inner full-stage-slide">
+        <div class="slide-header-row stagger-1">
+          <div>
+            <span class="step-tag">04 // PEMODELAN UML (BAGIAN 1)</span>
+            <h2>Use Case &amp; Activity Diagram</h2>
+          </div>
+          <div class="view-switcher" id="umlPart1Tabs" role="tablist">
+            <button class="tab-btn active" data-uml1="usecase">Use Case</button>
+            <button class="tab-btn" data-uml1="act-anggota">Activity Anggota</button>
+            <button class="tab-btn" data-uml1="act-admin">Activity Admin</button>
+            <button class="tab-btn" data-uml1="all">Semua (3)</button>
+          </div>
+        </div>
+
+        <div class="uml-showcase mode-usecase stagger-2" id="umlPart1Container">
+          <!-- 1. USE CASE DIAGRAM -->
+          <div class="uml-card-frame" data-item="usecase">
+            <div class="uml-frame-bar">
+              <span class="mono">01. Use Case Diagram</span>
+              <span class="zoom-hint">Klik gambar untuk zoom</span>
+            </div>
+            <div class="uml-split-body">
+              <div class="uml-img-stage">
+                <img
+                  src="uml-usecase.png"
+                  alt="Use Case Diagram Sistem Absensi Rapat Anggota Organisasi"
+                  class="uml-shot zoomable-shot"
+                  data-caption="Use Case Diagram — Sistem Absensi Rapat Anggota Organisasi"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="uml-missing" style="display: none;">
+                  <strong>Gambar belum ditemukan</strong>
+                  <span>Simpan screenshot Use Case dengan nama <code>uml-usecase.png</code> di folder proyek.</span>
+                </div>
+              </div>
+              <div class="uml-flow-guide">
+                <div class="guide-badge">ALUR INTERAKSI USE CASE</div>
+                <ol class="guide-steps">
+                  <li><strong>2 Aktor Utama:</strong> Sistem melibatkan <em>Admin/Sekretaris</em> sebagai pengelola penuh dan <em>Anggota</em> sebagai peserta rapat.</li>
+                  <li><strong>Akses Bersama:</strong> Kedua aktor sama-sama melakukan <em>Login</em>, <em>Melihat Dashboard</em>, <em>Melihat Jadwal Rapat</em>, dan <em>Logout</em>.</li>
+                  <li><strong>Hak Admin/Sekretaris:</strong> Mengelola Data Anggota, Data Rapat, Data Absensi, Melihat Rekap Absensi, hingga Mencetak Laporan.</li>
+                  <li><strong>Hak Anggota:</strong> Berfokus pada <em>Mengisi Absensi</em> rapat dan <em>Melihat Riwayat Absensi</em> pribadinya.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. ACTIVITY DIAGRAM ANGGOTA -->
+          <div class="uml-card-frame" data-item="act-anggota">
+            <div class="uml-frame-bar">
+              <span class="mono">02. Activity Diagram — Anggota</span>
+              <span class="zoom-hint">Klik gambar untuk zoom</span>
+            </div>
+            <div class="uml-split-body">
+              <div class="uml-img-stage">
+                <img
+                  src="uml-activity-anggota.png"
+                  alt="Activity Diagram Pengisian Absensi Rapat Anggota"
+                  class="uml-shot zoomable-shot"
+                  data-caption="Activity Diagram — Alur Pengisian Absensi Rapat oleh Anggota"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="uml-missing" style="display: none;">
+                  <strong>Gambar belum ditemukan</strong>
+                  <span>Simpan screenshot Activity Anggota dengan nama <code>uml-activity-anggota.png</code> di folder proyek.</span>
+                </div>
+              </div>
+              <div class="uml-flow-guide">
+                <div class="guide-badge">ALUR AKTIVITAS ANGGOTA</div>
+                <ol class="guide-steps">
+                  <li><strong>Autentikasi Login:</strong> Anggota membuka sistem dan menginput <em>Username &amp; Password</em>. Jika gagal, muncul pesan error; jika berhasil, sistem membuka <em>Dashboard</em>.</li>
+                  <li><strong>Pilih Jadwal Rapat:</strong> Anggota membuka menu <em>Jadwal Rapat</em> lalu memilih agenda rapat yang sedang berlangsung.</li>
+                  <li><strong>Pengisian Presensi:</strong> Anggota menekan <em>Isi Absensi</em> dan memilih salah satu status kehadiran: <strong>Hadir</strong>, <strong>Izin</strong>, atau <strong>Sakit</strong>.</li>
+                  <li><strong>Simpan &amp; Riwayat:</strong> Data absensi tersimpan ke sistem dan langsung dapat dicek pada halaman <em>Riwayat Absensi</em>.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. ACTIVITY DIAGRAM ADMIN/SEKRETARIS -->
+          <div class="uml-card-frame" data-item="act-admin">
+            <div class="uml-frame-bar">
+              <span class="mono">03. Activity Diagram — Admin/Sekretaris</span>
+              <span class="zoom-hint">Klik gambar untuk zoom</span>
+            </div>
+            <div class="uml-split-body">
+              <div class="uml-img-stage">
+                <img
+                  src="uml-activity-admin.png"
+                  alt="Activity Diagram Admin/Sekretaris"
+                  class="uml-shot zoomable-shot"
+                  data-caption="Activity Diagram — Alur Pengelolaan Data & Cetak Laporan oleh Admin/Sekretaris"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="uml-missing" style="display: none;">
+                  <strong>Gambar belum ditemukan</strong>
+                  <span>Simpan screenshot Activity Admin dengan nama <code>uml-activity-admin.png</code> di folder proyek.</span>
+                </div>
+              </div>
+              <div class="uml-flow-guide">
+                <div class="guide-badge">ALUR AKTIVITAS ADMIN / SEKRETARIS</div>
+                <ol class="guide-steps">
+                  <li><strong>Login ke Panel Admin:</strong> Admin menginput <em>Username &amp; Password</em>; jika valid sistem menampilkan <em>Dashboard</em> utama.</li>
+                  <li><strong>Pengelolaan Master Data:</strong> Admin dapat melakukan <em>Tambah, Edit, maupun Hapus</em> pada menu <strong>Data Anggota</strong> dan <strong>Data Rapat</strong>.</li>
+                  <li><strong>Validasi Data Absensi:</strong> Admin memantau dan mengedit status data absensi anggota apabila diperlukan penyesuaian.</li>
+                  <li><strong>Rekap &amp; Cetak PDF:</strong> Admin membuka menu <em>Rekap Absensi</em> lalu memilih <em>Cetak Laporan</em> untuk menyimpan/mencetak file PDF.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: UML SEQUENCE & CLASS DIAGRAM (WITH SCREENSHOTS & SPEAKER NOTES) -->
+    <section class="slide" data-title="UML: Sequence & Class Diagram">
+      <div class="slide-inner full-stage-slide">
+        <div class="slide-header-row stagger-1">
+          <div>
+            <span class="step-tag">05 // PEMODELAN UML (BAGIAN 2)</span>
+            <h2>Sequence &amp; Class Diagram</h2>
+          </div>
+          <div class="view-switcher" id="umlPart2Tabs" role="tablist">
+            <button class="tab-btn active" data-uml2="sequence">Sequence Diagram</button>
+            <button class="tab-btn" data-uml2="class">Class Diagram</button>
+            <button class="tab-btn" data-uml2="both">Berdampingan</button>
+          </div>
+        </div>
+
+        <div class="uml-showcase mode-sequence stagger-2" id="umlPart2Container">
+          <!-- SEQUENCE DIAGRAM -->
+          <div class="uml-card-frame" data-item="sequence">
+            <div class="uml-frame-bar">
+              <span class="mono">04. Sequence Diagram</span>
+              <span class="zoom-hint">Klik gambar untuk zoom</span>
+            </div>
+            <div class="uml-split-body">
+              <div class="uml-img-stage">
+                <img
+                  src="uml-sequence.png"
+                  alt="Sequence Diagram Proses Anggota Melakukan Absensi Rapat"
+                  class="uml-shot zoomable-shot"
+                  data-caption="Sequence Diagram — 13 Tahap Proses Anggota Melakukan Absensi Rapat"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="uml-missing" style="display: none;">
+                  <strong>Gambar belum ditemukan</strong>
+                  <span>Simpan screenshot Sequence Diagram dengan nama <code>uml-sequence.png</code> di folder proyek.</span>
+                </div>
+              </div>
+              <div class="uml-flow-guide">
+                <div class="guide-badge">ALUR PESAN SEQUENCE (13 TAHAP)</div>
+                <ol class="guide-steps">
+                  <li><strong>Validasi Login (Langkah 1–4):</strong> Anggota mengirim kredensial ke objek <em>Login</em>, lalu diverifikasi ke <em>Database</em> hingga mengembalikan respons berhasil.</li>
+                  <li><strong>Navigasi Jadwal (Langkah 5–9):</strong> Anggota masuk ke <em>Dashboard</em>, mengambil data <em>Jadwal Rapat</em>, memilih rapat, dan membuka <em>Form Absensi</em>.</li>
+                  <li><strong>Penyimpanan Data (Langkah 10–13):</strong> Anggota mengisi form, sistem menyimpan data ke <em>Database</em>, mengembalikan status tersimpan, dan menampilkan konfirmasi berhasil.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLASS DIAGRAM -->
+          <div class="uml-card-frame" data-item="class">
+            <div class="uml-frame-bar">
+              <span class="mono">05. Class Diagram</span>
+              <span class="zoom-hint">Klik gambar untuk zoom</span>
+            </div>
+            <div class="uml-split-body">
+              <div class="uml-img-stage">
+                <img
+                  src="uml-class.png"
+                  alt="Class Diagram Sistem Absensi Rapat Organisasi"
+                  class="uml-shot zoomable-shot"
+                  data-caption="Class Diagram — Struktur Entitas Anggota, Admin/Sekertaris, Rapat, dan Absensi"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                />
+                <div class="uml-missing" style="display: none;">
+                  <strong>Gambar belum ditemukan</strong>
+                  <span>Simpan screenshot Class Diagram dengan nama <code>uml-class.png</code> di folder proyek.</span>
+                </div>
+              </div>
+              <div class="uml-flow-guide">
+                <div class="guide-badge">ALUR RELASI CLASS DIAGRAM</div>
+                <ol class="guide-steps">
+                  <li><strong>Class Admin/Sekertaris:</strong> Menyimpan <code>id_admin, nama, jabatan</code> dengan operasi <code>kelola_data()</code> dan <code>buat_laporan()</code> untuk mengatur data rapat.</li>
+                  <li><strong>Class Anggota:</strong> Menyimpan identitas <code>id_anggota, npm, nama, divisi, jabatan</code> yang terhubung dengan jadwal rapat.</li>
+                  <li><strong>Class Rapat &amp; Absensi:</strong> Entitas <em>Rapat</em> (<code>agenda, tanggal, waktu, tempat</code>) berelasi dengan <em>Absensi</em> untuk mencatat <code>id_anggota, id_rapat, status, keterangan</code>.</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: HASIL JADI DASHBOARD WEB (SCREENSHOT) -->
+    <section class="slide" data-title="Implementasi Dashboard EXORA">
+      <div class="slide-inner full-stage-slide">
+        <div class="slide-header-row stagger-1">
+          <div>
+            <span class="step-tag">06 // IMPLEMENTASI ANTARMUKA JADI</span>
+            <h2>Tampilan Dashboard Web EXORA</h2>
+          </div>
+          <div class="view-switcher" role="tablist">
+            <button class="tab-btn active" data-view="admin">Dashboard Admin</button>
+            <button class="tab-btn" data-view="anggota">Dashboard Anggota</button>
+            <button class="tab-btn" data-view="both">Berdampingan</button>
+          </div>
+        </div>
+
+        <div class="showcase-container view-admin stagger-2" id="showcaseContainer">
+          <!-- ADMIN DASHBOARD SCREENSHOT -->
+          <div class="browser-frame" id="frameAdmin">
+            <div class="browser-top">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <div class="url-pill mono">exora.app/admin/dashboard — Nayara Narendra (Admin)</div>
+              <span class="zoom-hint">Klik untuk zoom</span>
+            </div>
+            <div class="screenshot-wrap">
+              <img
+                src="dashboard-admin.png"
+                alt="Tampilan Dashboard Admin EXORA"
+                class="dashboard-shot zoomable-shot"
+                data-caption="Implementasi Dashboard Admin — Nayara Narendra (Admin)"
+                onerror="this.style.display='none'; document.getElementById('fallbackAdmin').style.display='grid';"
+              />
+              <div class="fallback-dashboard" id="fallbackAdmin" style="display: none;">
+                <aside class="fb-sidebar">
+                  <div class="fb-logo">EXORA<span>Sistem Absensi Rapat Organisasi</span></div>
+                  <div class="fb-menu-label">MENU UTAMA</div>
+                  <div class="fb-nav active">Dashboard</div>
+                  <div class="fb-nav">Data Anggota</div>
+                  <div class="fb-nav">Data Rapat</div>
+                  <div class="fb-nav">Jadwal Rapat</div>
+                  <div class="fb-nav">Data Absensi</div>
+                  <div class="fb-nav">Rekap Absensi</div>
+                  <div class="fb-nav">Laporan</div>
+                </aside>
+                <div class="fb-main">
+                  <div class="fb-topbar">
+                    <strong>Dashboard</strong>
+                    <span class="fb-user-badge">Nayara Narendra (Admin)</span>
+                  </div>
+                  <h4>Selamat Datang, Nayara Narendra!</h4>
+                  <div class="fb-kpis">
+                    <div class="fb-kpi"><span>Total Anggota</span><strong>2</strong></div>
+                    <div class="fb-kpi"><span>Total Rapat</span><strong>3</strong></div>
+                    <div class="fb-kpi"><span>Hadir</span><strong>1</strong></div>
+                    <div class="fb-kpi"><span>Tidak Hadir</span><strong>0</strong></div>
+                  </div>
+                  <div class="fb-panel">
+                    <div class="fb-panel-title">Absensi Terbaru</div>
+                    <div class="fb-table-row fb-th">
+                      <span>No</span><span>Nama</span><span>Rapat</span><span>Tanggal</span><span>Status</span>
+                    </div>
+                    <div class="fb-table-row">
+                      <span>1</span><span>Alfadil Ilhamora</span><span>Rapat Pembentukan Panitia Pelantikan</span><span>22 November 2026</span><span class="fb-status">Hadir</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ANGGOTA DASHBOARD SCREENSHOT -->
+          <div class="browser-frame" id="frameAnggota">
+            <div class="browser-top">
+              <div class="dots"><span></span><span></span><span></span></div>
+              <div class="url-pill mono">exora.app/anggota/dashboard — Alfadil Ilhamora (Anggota)</div>
+              <span class="zoom-hint">Klik untuk zoom</span>
+            </div>
+            <div class="screenshot-wrap">
+              <img
+                src="dashboard-anggota.png"
+                alt="Tampilan Dashboard Anggota EXORA"
+                class="dashboard-shot zoomable-shot"
+                data-caption="Implementasi Dashboard Anggota — Alfadil Ilhamora (Anggota)"
+                onerror="this.style.display='none'; document.getElementById('fallbackAnggota').style.display='grid';"
+              />
+              <div class="fallback-dashboard" id="fallbackAnggota" style="display: none;">
+                <aside class="fb-sidebar">
+                  <div class="fb-logo">EXORA<span>Sistem Absensi Rapat Organisasi</span></div>
+                  <div class="fb-menu-label">MENU UTAMA</div>
+                  <div class="fb-nav active">Dashboard</div>
+                  <div class="fb-nav">Jadwal Rapat</div>
+                  <div class="fb-nav">Isi Absensi</div>
+                  <div class="fb-nav">Riwayat Absensi</div>
+                </aside>
+                <div class="fb-main">
+                  <div class="fb-topbar">
+                    <strong>Dashboard</strong>
+                    <span class="fb-user-badge">Alfadil Ilhamora (Anggota)</span>
+                  </div>
+                  <h4>Selamat Datang, Alfadil Ilhamora!</h4>
+                  <div class="fb-kpis">
+                    <div class="fb-kpi"><span>Total Hadir</span><strong>1</strong></div>
+                    <div class="fb-kpi"><span>Total Izin</span><strong>0</strong></div>
+                    <div class="fb-kpi"><span>Total Sakit</span><strong>0</strong></div>
+                    <div class="fb-kpi"><span>Tidak Hadir</span><strong>0</strong></div>
+                  </div>
+                  <div class="fb-panel">
+                    <div class="fb-panel-title">Jadwal Rapat Terdekat</div>
+                    <div class="fb-event">
+                      <strong>Rapat Bulanan</strong>
+                      <span>20 November 2026 &bull; 19:30 WIB &bull; Sekretariat Organisasi</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: PENUTUP -->
+    <section class="slide" data-title="Kesimpulan & Penutup">
+      <div class="slide-inner cover-layout">
+        <div class="pill-badge stagger-1">
+          <span class="pulse-ring"></span>
+          KESIMPULAN AKHIR
+        </div>
+        <h2 class="closing-title stagger-2">Efisiensi Digital dalam Manajemen Rapat Organisasi</h2>
+        <p class="hero-desc stagger-3">
+          Sistem <strong>EXORA</strong> mentransformasi pencatatan manual menjadi sistem berbasis web yang terstruktur—memudahkan Sekretaris dalam mengelola data serta memberikan transparansi jadwal dan riwayat kehadiran bagi seluruh Anggota.
+        </p>
+        <div class="author-card spotlight-card stagger-4">
+          <div class="author-item">
+            <span class="meta-label">TERIMA KASIH</span>
+            <span class="meta-value">Nayla Faizatul Khusnah — 25010065</span>
+          </div>
+        </div>
+        <button class="icon-btn stagger-5 restart-btn" id="btnRestart">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"></polyline>
+            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+          </svg>
+          <span>Kembali ke Slide Awal</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Bottom Controls Dock -->
+  <footer class="bottombar">
+    <div class="bottom-left">
+      <div class="slide-counter mono">
+        <span id="currentSlideNum">01</span>
+        <span class="sep">/</span>
+        <span id="totalSlideNum">08</span>
+      </div>
+      <div class="shortcut-bar" aria-hidden="true">
+        <kbd>&larr;</kbd><kbd>&rarr;</kbd><span>Slide</span>
+        <kbd>G</kbd><span>Grid</span>
+        <kbd>F</kbd><span>Full</span>
+      </div>
+    </div>
+
+    <div class="nav-dots" id="navDots" aria-label="Navigasi Slide"></div>
+
+    <div class="nav-buttons">
+      <button class="ctrl-btn" id="btnPrev" aria-label="Slide Sebelumnya">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        <span>Prev</span>
+      </button>
+      <button class="ctrl-btn primary" id="btnNext" aria-label="Slide Berikutnya">
+        <span>Next</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- Slide Overview Grid Modal -->
+  <div class="overview-modal" id="overviewModal" aria-hidden="true">
+    <div class="overview-header">
+      <h3>Semua Slide Presentasi</h3>
+      <button class="icon-btn" id="btnCloseOverview">Tutup (Esc)</button>
+    </div>
+    <div class="overview-grid" id="overviewGrid"></div>
+  </div>
+
+  <!-- Fullscreen Image Zoom Lightbox -->
+  <div class="lightbox-modal" id="lightboxModal" aria-hidden="true">
+    <div class="lightbox-top">
+      <span class="lightbox-caption" id="lightboxCaption">Preview Diagram</span>
+      <div class="lightbox-actions">
+        <button class="icon-btn" id="btnToggleZoom">Perbesar 1.6x</button>
+        <button class="icon-btn" id="btnCloseLightbox">Tutup (Esc)</button>
+      </div>
+    </div>
+    <div class="lightbox-body" id="lightboxBody">
+      <img src="" alt="Zoom Preview" id="lightboxImg" />
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
